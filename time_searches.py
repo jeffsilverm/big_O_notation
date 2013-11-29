@@ -6,6 +6,7 @@
 # N is passed as an argument on the command line.
 import iterative_binary_search
 import recursive_binary_search
+import library_binary_search
 import random
 import sys
 
@@ -55,6 +56,9 @@ def call_recursive_binary_search(value_sought):
 # which is fast)
     recursive_binary_search.recursive_binary_search(corpus, value_sought)   
 
+def call_library_binary_search(value_sought):
+    library_binary_search.library_binary_search(corpus, value_sought)
+    
     
 N = int(sys.argv[1])
 create_corpus(N)
@@ -82,3 +86,12 @@ if __name__ == '__main__':
     recursive_time = timeit.timeit(recursive_call_str, \
                             setup="import time_searches", number=number)
     print "recursive binary search:", recursive_time
+
+    library_call_str = "time_searches.call_library_binary_search( " + \
+                            tq + value_sought + tq + ")" 
+    library_time = timeit.timeit(library_call_str, \
+                            setup="import time_searches", number=number)
+    print "library binary search:", library_time
+
+    
+

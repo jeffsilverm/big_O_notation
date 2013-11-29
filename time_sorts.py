@@ -8,32 +8,51 @@ import merge_sort
 import random
 import sys
 
-def call_bubble_sort(N) :
-    testset = range(N)
-    testcase = testset[:]      # Make a copy, not a reference
-    random.shuffle(testcase)
-    assert testcase != testset  # we've shuffled it
+testset = []
+testcase = []
+N = -1
+def call_bubble_sort() :
+    global testcase
+
+    testcase = testset[:]      # Make a copy, not a reference, because bubble
+                               # sort sorts in place and we want a reproducible
+                               # test case
     bubble_sort.bubble_sort(testcase)        # sort in place
-    assert testcase == testset  # we've unshuffled it back into a copy
 
 
-def call_merge_sort(N) :
-    testset = range(N)
-    testcase = testset[:]      # Make a copy, not a reference
-    random.shuffle(testcase)
-    assert testcase != testset  # we've shuffled it
+def call_merge_sort() :
+    global testcase
+    
+    testcase = testset[:]
     testcase = merge_sort.merge_sort(testcase)
-    assert testcase == testset  # we've unshuffled it back into a copy
+
+
+def setup_vectors() :
+    global testset, testcase, N
+    N = int(sys.argv[1])
+    testset = range(N)
+    random.shuffle(testset)
+
+# Get called at module import time, to set the the testcase and testset
+setup_vectors()
+assert testcase != testset  # verify that we've shuffled it
+
 
 if __name__ == '__main__':
     import timeit
-    N = int(sys.argv[1])
+
+
 # This is a little pythonic trickery.  The input to the timeit.timeit method is
 # a snippet of code, which gets executed number of times.  In order to
 # parameterize the code, use string substitution, the % operator, to modify the
 # string.  Note that this code has to import itself in order to get the
 # subroutines in scope.
-    print("Bubble Sort:", timeit.timeit("time_sorts.call_bubble_sort(%d)" % N ,
-          setup="import time_sorts", number=10000))
-    print("Merge Sort:", timeit.timeit("time_sorts.call_merge_sort(%d)" % N ,
-          setup="import time_sorts", number=10000))
+    bubble_sort_time = timeit.timeit("time_sorts.call_bubble_sort()",
+          setup="import time_sorts", number=10000)
+
+    print "Bubble Sort:", bubble_sort_time
+
+    merge_sort_time = timeit.timeit("time_sorts.call_merge_sort()",
+          setup="import time_sorts", number=10000)
+
+    print "Merge Sort:", merge_sort_time
