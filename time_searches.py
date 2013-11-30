@@ -79,19 +79,19 @@ if __name__ == '__main__':
                             tq + value_sought + tq + ")" 
     iterative_time = timeit.timeit(iterative_call_str, \
                             setup="import time_searches", number=number)
-    print "Iterative binary search:", iterative_time
+    print "Iterative binary search: %.2e" % iterative_time
 
     recursive_call_str = "time_searches.call_recursive_binary_search( " + \
                             tq + value_sought + tq + ")" 
     recursive_time = timeit.timeit(recursive_call_str, \
                             setup="import time_searches", number=number)
-    print "recursive binary search:", recursive_time
+    print "recursive binary search: %.2e" % recursive_time
 
     library_call_str = "time_searches.call_library_binary_search( " + \
                             tq + value_sought + tq + ")" 
     library_time = timeit.timeit(library_call_str, \
                             setup="import time_searches", number=number)
-    print "library binary search:", library_time
+    print "library binary search: %.2e" % library_time
 
     
 

@@ -19,7 +19,7 @@ def recursive_binary_search(corpus, value_sought, low = 0, high = -1):
 
 if "__main__" == __name__ :
     import time_searches   # We need this to create the corpus and value_sought
-    sys.setrecursionlimit(15000)    # run this on a 64 bit machine - we go deep
+    sys.setrecursionlimit(15000000)    # run this on a 64 bit machine - we go deep
 
     value_sought = time_searches.corpus[time_searches.value_sought_idx]
     print "The value sought is %s" % value_sought
