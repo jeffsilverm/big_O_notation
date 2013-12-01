@@ -3,6 +3,9 @@
 #
 # From http://jeremykun.com/2012/07/18/the-fast-fourier-transform/
 import cmath
+# See http://docs.scipy.org/doc/numpy-1.7.0/reference/generated/numpy.fft.fft.html
+from numpy.fft import fft
+from numpy import array
 
 # I think the overhead of a function call outweights the clarity gained
 def omega(p, q):
@@ -43,9 +46,6 @@ implementation of the Discrete Fourier Transform.  It goes as O(n*log(n))
 signal is a list of complex numbers, of length which is a power of two.  However,
 this implementation uses number, which is a highly optimized library written in
 C and FORTRAN"""
-# See http://docs.scipy.org/doc/numpy-1.7.0/reference/generated/numpy.fft.fft.html
-    from numpy.fft import fft
-    from numpy import array
 
 #    if __name__ == "__main__" :
 #        a = array((0.0, 0.924, 0.707, -0.383, -1.0, -0.383, 0.707, 0.924, 0.0,
