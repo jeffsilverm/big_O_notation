@@ -28,10 +28,25 @@ def call_merge_sort() :
 
 
 def setup_vectors() :
-    global testset, testcase, N
+    global testset, testcase, N, ordering
     N = int(sys.argv[1])
-    testset = range(N)
-    random.shuffle(testset)
+    if len(sys.argv) <= 2 or sys.argv[2] == '-r' :
+        testset = range(N)
+        random.shuffle(testset)
+        ordering = 'random'
+    elif sys.argv[2] == '-i' :
+        testset = range(N)
+    elif sys.argv[2] == '-d' :
+        testset = range(N,0,-1)
+    else :
+        print """Usage: python %s N [-i|-r|-d]\n
+N is the size of the sort (required)
+-i monotonically increasing
+-d monotonically decreasing
+-r random (the default) """
+        exit
+        
+
 
 # Get called at module import time, to set the the testcase and testset
 setup_vectors()
